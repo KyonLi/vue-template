@@ -7,7 +7,7 @@ import {baseApi} from '@/config'
 const service = axios.create({
   baseURL: baseApi, // url = base api url + request url
   withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+  timeout: 30000 // request timeout
 })
 
 // request拦截器 request interceptor
@@ -17,12 +17,15 @@ service.interceptors.request.use(
     if (!config.hideLoading) {
       // loading
       Toast.loading({
-        forbidClick: true
+        forbidClick: true,
+        duration: 0
       })
     }
     if (store.getters.token) {
       config.headers['token'] = ''
     }
+    console.log("Now request " + config.url)
+    console.log(config.data)
     return config
   },
   error => {
@@ -36,6 +39,7 @@ service.interceptors.response.use(
   response => {
     Toast.clear()
     const res = response.data
+    console.log(res)
     if (response.status !== 200) {
       // 登录超时,重新登录
       if (response.status === 401) {
@@ -50,8 +54,12 @@ service.interceptors.response.use(
   },
   error => {
     Toast.clear()
-    console.log('err' + error) // for debug
-    return Promise.reject(error)
+    let errMsg = error.toString()
+    console.log(errMsg) // for debug
+    if (error.message.includes('timeout')) {
+      return Promise.reject('网络超时')
+    }
+    return Promise.reject(errMsg)
   }
 )
 
