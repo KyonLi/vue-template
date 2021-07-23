@@ -25,7 +25,7 @@
     flex-direction: column;
     justify-content: center;
     background-color: #f7f8fa;
-    height: 100vh;
+    flex-grow: 1;
     padding-bottom: 100px;
     box-sizing: border-box;
   }

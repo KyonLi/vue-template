@@ -31,4 +31,15 @@
   html {
     background: #ededed;
   }
+  #app {
+    display: flex;
+    flex-direction: column;
+    max-width: 475px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 </style>
