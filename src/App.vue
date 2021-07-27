@@ -34,7 +34,7 @@
   #app {
     display: flex;
     flex-direction: column;
-    max-width: 475px;
+    max-width: 540Px;
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
